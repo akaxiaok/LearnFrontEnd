@@ -1,2 +1,2 @@
-# ReligiousSite
-In order to be self-discipline, I need a sense of ceremony.
+`
+要知道，宗教是人类历史上至今为止最成功的组织，就是连政府也在向宗教学习。我们也可以向宗教学习很多的东西。爱因斯坦说过一句话：I am a deeply religious nonbeliever。我们学习宗教，不是为了学习宗教的内容，而是学习宗教的形式。例如说，我们坚持向自己的人生目标去努力，最重要的，是时刻给自己提醒。怎么提醒呢？必须要有仪式。
