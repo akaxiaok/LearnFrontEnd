@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >3D Banner</title >
+    <style >
+        * {
+            transition: all .3s;
+            -webkit-transition: all .3s;
+            transition-timing-function: linear;
+            -webkit-transition-timing-function: linear;
+        }
+
+        .banner {
+            perspective: 3000px;
+            border-radius: 10px;
+        }
+
+        .bg {
+            position: relative;
+            width: 1200px;
+            height: 600px;
+            margin: 100px auto;
+            background: url("1.png") center no-repeat;
+            background-size: 100% 100%;
+            transform-style: preserve-3d;
+            -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            -webkit-transform: rotateY(0deg) rotateX(0deg);
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+
+        .img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            bottom:3px;
+        }
+
+        .phone-back {
+            background: url("2.png") center no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .phone-front {
+            background: url("3.png") center no-repeat;
+            background-size: 100% 100%;
+        }
+    </style >
+</head >
+<body >
+<div class="banner" >
+    <div class="bg" >
+        <span class="img phone-back a" ></span >
+        <span class="img phone-front a" ></span >
+    </div >
+</div >
+<script src="jquery-3.2.1.min.js" ></script >
+<script >
+  $(function () {
+    $(".bg").mouseenter(function () {
+      console.log(1);
+      var thisPX = $(this).offset().left;
+      var thisPY = $(this).offset().top;
+      var boxWidth = $(this).outerWidth();
+      var boxHeight = $(this).outerHeight();
+      $(this).addClass("threeD");
+      $(".threeD").mousemove(function (event) {
+        var mouseX = event.pageX - thisPX;
+        var mouseY = event.pageY - thisPY;
+        var X;
+        var Y;
+        if (mouseX > boxWidth / 2) {
+          X = mouseX - boxWidth / 2;
+        } else {
+          X = mouseX - boxWidth / 2;
+        }
+        if (mouseY > boxHeight / 2) {
+          Y = boxHeight / 2 - mouseY;
+        } else {
+          Y = boxHeight / 2 - mouseY;
+        }
+        $(".threeD").css({
+          "-webkit-transform": "rotateY(" + X / 50 + "deg) " + "rotateX(" + Y / 50 + "deg)",
+          "transform": "rotateY(" + X / 50 + "deg) " + "rotateX(" + Y / 50 + "deg)"
+        });
+        $(".phone-front").css({
+          "-webkit-transform": "translateX(" + X / 150 + "px) " + "translateX(" + Y / 150 + "px)"
+        });
+      });
+    });
+    $(".bg").mouseleave(function () {
+      $(this).removeClass("threeD");
+      $(this).css({
+        "-webkit-transform": "rotateY(0deg) rotateX(0deg)",
+        "transform": "rotateY(0deg) rotateX(0deg)"
+      });
+      $(".phone-front").css({
+        "-webkit-transform": "translateX(0px) " + "translateX(0px)"
+      });
+    });
+  });
+</script >
+</body >
+</html >
