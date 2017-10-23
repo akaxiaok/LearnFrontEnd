@@ -6,11 +6,15 @@
 
 [总结个人使用过的移动端布局方法](https://segmentfault.com/a/1190000010211016)
 
-[CSS 最核心的几个概念](http://geekplux.com/2014/04/25/several_core_concepts_of_css.html)
-
 [实现一个 Swiper](https://aotu.io/notes/2017/07/17/design-a-swiper/)
 
+[CSS 布局说](http://web.jobbole.com/92612/)
+
 ## JS技巧
+
+[URL 编码的奥秘](https://aotu.io/notes/2017/06/15/The-mystery-of-URL-encoding/)
+
+[前端常见跨域解决方案](http://web.jobbole.com/92405/)
 
 [通过一个场景实例 了解前端处理大数据的无限可能](https://zhuanlan.zhihu.com/p/27882908)
 
