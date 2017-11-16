@@ -1,6 +1,6 @@
 // 迭代器 iterator 具有 next 方法的对象
 // 可迭代 iterable 包含迭代器的对象
-let ajax = require('./ajax');
+let { ajax, request } = require('./ajax');
 let something = (function () {
   let nextValue;
   return {
@@ -57,8 +57,6 @@ for (let v of someother()) {
 }
 
 
-
-
 function* main() {
   try {
     let text = yield foo(11, 31);
@@ -79,5 +77,76 @@ function foo(x, y) {
     }
   })
 }
+
 let it = main();
 it.next();
+
+(function () {
+  function foo(x, y) {
+    return request(`url?${x}&${y}`);
+  }
+
+  function* main(x, y) {
+    try {
+      let text1 = yield foo(x, y);
+      console.log(text1);
+      let text2 = yield foo(x + 1, y + 1);
+      console.log(text2);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  let it = main(1, 1);
+  let p = it.next().value;
+  p.then(function (val) {
+    it.next(val);
+  }, function (err) {
+    it.throw(err)
+  });
+  run(main, 2, 2);
+})();
+
+function run(gen) {
+  let args = [].slice.call(arguments, 1), it;
+  it = gen.apply(this, args);
+  return Promise.resolve().then(function handleNext(value) {
+    let next = it.next(value);
+    return (function handleResult(next) {
+      if (next.done) {
+        return next.value;
+      }
+      else {
+        return Promise.resolve(next.value).then(handleNext, function handleErr
+          (err) {
+          return Promise.resolve(it.throw(err)).then(handleNext);
+        })
+      }
+    })(next);
+  });
+}
+
+(function () {
+  async function main(x) {
+    try {
+      let text1 = await request(x);
+      console.log(text1);
+      request.timeout = 3000;
+      let text2 = await request(x + 1);
+      console.log(text2);
+      request.isError = true; // change me
+      let text3 = await request(x + 2);
+      return 'job done--from main';
+    } catch (err) {
+      console.error('main:',err);
+      throw Error(err);
+    }
+  }
+
+  let p = main(3);
+  p.then(function (val) {
+    console.log('async result:', val);
+  }, function (err) {
+    console.error('async result:',err.message);
+  })
+})();
