@@ -1,6 +1,7 @@
 // 迭代器 iterator 具有 next 方法的对象
 // 可迭代 iterable 包含迭代器的对象
-let { ajax, request } = require('./ajax');
+
+let { ajax, request, run } = require('./util');
 let something = (function () {
   let nextValue;
   return {
@@ -107,25 +108,6 @@ it.next();
   run(main, 2, 2);
 })();
 
-function run(gen) {
-  let args = [].slice.call(arguments, 1), it;
-  it = gen.apply(this, args);
-  return Promise.resolve().then(function handleNext(value) {
-    let next = it.next(value);
-    return (function handleResult(next) {
-      if (next.done) {
-        return next.value;
-      }
-      else {
-        return Promise.resolve(next.value).then(handleNext, function handleErr
-          (err) {
-          return Promise.resolve(it.throw(err)).then(handleNext);
-        })
-      }
-    })(next);
-  });
-}
-
 (function () {
   async function main(x) {
     try {
@@ -138,7 +120,7 @@ function run(gen) {
       let text3 = await request(x + 2);
       return 'job done--from main';
     } catch (err) {
-      console.error('main:',err);
+      console.error('main:', err);
       throw Error(err);
     }
   }
@@ -147,6 +129,6 @@ function run(gen) {
   p.then(function (val) {
     console.log('async result:', val);
   }, function (err) {
-    console.error('async result:',err.message);
+    console.error('async result:', err.message);
   })
 })();
