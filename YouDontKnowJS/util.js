@@ -28,6 +28,18 @@ function run(gen) {
     return (function handleResult(next) {
       if (next.done) {
         return next.value;
+      } else if (typeof next.value == "function") {
+        return new Promise(function (resolve, reject) {
+          next.value(function (err, msg) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(msg);
+            }
+          });
+        }).then(handleNext, function handleErr(err) {
+          return Promise.resolve(it.throw(err)).then(handleResult);
+        });
       }
       else {
         return Promise.resolve(next.value).then(handleNext, function handleErr
