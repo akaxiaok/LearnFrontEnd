@@ -45,6 +45,8 @@
     request.onreadystatechange = displayDetails;
     request.send();
   }
-  getDetail('akaxiaok');
+
+  var button = document.getElementById('request');
+  button.onclick = getDetail.bind(null, 'akaxiaok');
 })();
 
