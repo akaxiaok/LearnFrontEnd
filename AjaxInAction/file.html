@@ -13,7 +13,7 @@
 </form >
 <button id="ajaxFormData" >ajaxFormData</button >
 <button id="ajaxFileAPI" >ajaxFileAPI</button >
-<span id="progress"></span>
+<span id="progress" ></span >
 <script >
   document.getElementById('ajaxFormData').addEventListener('click', function () {
     var files = document.getElementById('file').files;
@@ -31,7 +31,11 @@
       }
     }
     var progressBar = document.getElementById('progress');
-    xhr.upload.onprogress = function(e) {
+
+    // xhr.upload.onprogress 或者 xhr.upload.addEventListener("progress", updateProgress) 为指定上传处理函数
+    // xhr.onprogress 或者 xhr.addEventListener("progress", updateProgress) 为指定下载处理函数
+
+    xhr.upload.onprogress = function (e) {
       if (e.lengthComputable) {
         progressBar.value = (e.loaded / e.total) * 100;
         progressBar.textContent = progressBar.value; // Fallback for unsupported browsers.
@@ -39,13 +43,13 @@
     };
     xhr.send(formData);
   });
-//  document.getElementById('ajaxFileAPI').addEventListener('click', function () {
-//    var file = document.getElementById('file').files[0];
-//    var xhr = new XMLHttpRequest();
-//    xhr.open('POST', '/form', true);
-//    xhr.setRequestHeader('Content-Type', file.type);
-//    xhr.send(file);
-//  });
+  //  document.getElementById('ajaxFileAPI').addEventListener('click', function () {
+  //    var file = document.getElementById('file').files[0];
+  //    var xhr = new XMLHttpRequest();
+  //    xhr.open('POST', '/form', true);
+  //    xhr.setRequestHeader('Content-Type', file.type);
+  //    xhr.send(file);
+  //  });
 </script >
 </body >
 </html >
