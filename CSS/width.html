@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+    <style >
+        .scroll {
+            overflow: scroll;
+        }
+
+        .hidden {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 200px;
+            background: #09f;
+        }
+
+        .inHidden {
+            height: 100px;
+            padding: 0 10px;
+            margin: 0 20px;
+            border: 5px solid #000;
+        }
+
+        .inHiddenWidth {
+            width: 300px;
+            height: 100px;
+            padding: 0 10px;
+            margin: 0 20px;
+            border: 5px solid #000;
+        }
+        .inHiddenWidth::after{
+            content: 'sss';
+            width: 20px;
+        }
+    </style >
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js" ></script >
+
+</head >
+<body >
+<div class="scroll" >some text some text some text some text</div >
+<div class="noScroll" >some text some text some text some text</div >
+<div class="hidden" >
+    <div class="inHidden" >some text some text some text some text</div >
+    <br >
+    <div class="inHiddenWidth" >some text some text some text some text</div >
+</div >
+<script >
+  _ = function (className) {
+    return document.getElementsByClassName(className)[0];
+  };
+  console.info('scroll');
+  console.log('clientWidth', _('scroll').clientWidth);
+  console.log('offsetWidth', _('scroll').offsetWidth);
+
+  console.info('noScroll');
+  console.log('clientWidth', _('noScroll').clientWidth);
+  console.log('offsetWidth', _('noScroll').offsetWidth);
+
+  console.info('inHidden');
+  console.log('clientWidth', _('inHidden').clientWidth);
+  console.log('scrollWidth', _('inHidden').scrollWidth);
+  console.log('offsetWidth', _('inHidden').offsetWidth);
+  console.log('getBoundingClientRect',_('inHidden').getBoundingClientRect());
+
+  console.log('innerWidth', $('.inHidden').innerWidth());
+  console.log('outerWidth', $('.inHidden').outerWidth());
+  console.log('outerWidth(true)', $('.inHidden').outerWidth(true));
+  console.log('width', $('.inHidden').width());
+
+  console.info('inHiddenWidth');
+  console.log('clientWidth', _('inHiddenWidth').clientWidth);
+  console.log('scrollWidth', _('inHiddenWidth').scrollWidth);
+  console.log('offsetWidth', _('inHiddenWidth').offsetWidth);
+
+  console.log('innerWidth', $('.inHiddenWidth').innerWidth());
+  console.log('outerWidth', $('.inHiddenWidth').outerWidth());
+  console.log('outerWidth(true)', $('.inHiddenWidth').outerWidth(true));
+  console.log('width', $('.inHiddenWidth').width());
+</script >
+</body >
+</html >
