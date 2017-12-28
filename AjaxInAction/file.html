@@ -5,14 +5,16 @@
     <title >Title</title >
 </head >
 <body >
-<form action="/form" method="post" enctype="multipart/form-data" >
+<form id="form" action="/form" method="post" enctype="multipart/form-data" >
     <!--有 name 属性才会提交-->
     <input type="text" name="text" >
     <input type="file" id="file" title="file" name="formFile" multiple >
+    <br />
     <button type="submit" >submit</button >
+    <br />
+    <button id="submitFrame" type="submit" >submitFrame</button >
 </form >
 <button id="ajaxFormData" >ajaxFormData</button >
-<button id="ajaxFileAPI" >ajaxFileAPI</button >
 <span id="progress" ></span >
 <script >
   document.getElementById('ajaxFormData').addEventListener('click', function () {
@@ -20,7 +22,7 @@
     var formData = new FormData();
     Array.from(files).forEach(function (v, i) {
       formData.append('FormData', v);
-    })
+    });
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/form', true);
     xhr.onload = function () {
@@ -29,7 +31,7 @@
       } else {
         console.log('upload complete');
       }
-    }
+    };
     var progressBar = document.getElementById('progress');
 
     // xhr.upload.onprogress 或者 xhr.upload.addEventListener("progress", updateProgress) 为指定上传处理函数
@@ -43,13 +45,24 @@
     };
     xhr.send(formData);
   });
-  //  document.getElementById('ajaxFileAPI').addEventListener('click', function () {
-  //    var file = document.getElementById('file').files[0];
-  //    var xhr = new XMLHttpRequest();
-  //    xhr.open('POST', '/form', true);
-  //    xhr.setRequestHeader('Content-Type', file.type);
-  //    xhr.send(file);
-  //  });
+  document.getElementById('submitFrame').addEventListener('click', function (e) {
+    e.preventDefault();
+    //<iframe name="targetFrame" style="display: none" ></iframe >
+    var frame = document.getElementById('targetFrame');
+    if (!frame) {
+      frame = document.createElement('iframe');
+      frame.id = 'targetFrame';
+      frame.style.display = 'none';
+      frame.name = "targetFrame";
+      document.body.appendChild(frame);
+    }
+    var form = document.getElementById('form');
+    form.target = 'targetFrame';
+    form.submit();
+    frame.onload = function (e) {
+      console.log(this.contentDocument.body.textContent);
+    }
+  });
 </script >
 </body >
 </html >
