@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+</head >
+<body >
+<form action="" >
+    <input type="text" id="inputText" >
+</form >
+<ul >
+    <li >1</li >
+    <li >2</li >
+    <li >3</li >
+</ul >
+<script >
+  lis = document.getElementsByTagName('li');
+  for (var i = 0; i < lis.length; i++) {
+    lis[i].tabIndex = -1;
+  }
+  lis[1].focus();
+
+</script >
+</body >
+</html >
