@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+</head >
+<body >
+<select name="single" id="single" >
+    <option value="1" >one</option >
+    <option value="2" >two</option >
+    <option value="3" >three</option >
+</select >
+<select name="multiple" multiple id="multiple" >
+    <option value="1" >one</option >
+    <option value="2" >two</option >
+    <option value="3" >three</option >
+</select >
+<script >
+    var single = document.getElementById('single');
+    var multiple = document.getElementById('multiple');
+    console.log(single.options);
+    var four = document.createElement('option');
+    four.value = 4;
+    four.text = 'four';
+    var copy =  four.cloneNode(true);
+    single.add(four);
+    multiple.add(copy);
+    console.log(multiple.type);
+    multiple.size=2;
+    console.log(multiple.size);
+    console.log(multiple.options);
+</script >
+</body >
+</html >
