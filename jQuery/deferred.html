@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+    <script src="jquery.js" ></script >
+</head >
+<body >
+<button id="resolveOne" >resolve one</button >
+<button id="rejectOne" >reject one</button >
+<button id="resolveTwo" >resolve Two</button >
+<button id="rejectTwo" >reject Two</button >
+<button id="resolveThree" >resolve Three</button >
+<button id="rejectThree" >reject Three</button >
+<script >
+  var deferreds = [];
+  for (var i = 0; i < 3; i++) {
+    deferreds.push($.Deferred());
+  }
+  $('button').click(function () {
+    var results = Array(3);
+    var index = $(this).index('button');
+    var def = Math.floor(index / 2);
+    var action = index % 2 ? 'reject' : 'resolve';
+    results[def] = 'result';
+    deferreds[def][action](results[0],results[1],results[2]);
+  });
+  $.when(deferreds[0], deferreds[1], deferreds[2]).done(function () {
+    $.each(arguments, function (i, v) {
+      console.log(v);
+    })
+  }).fail(function () {
+    $.each(arguments, function (i, v) {
+      console.log(v);
+    })
+  });
+</script >
+</body >
+</html >
