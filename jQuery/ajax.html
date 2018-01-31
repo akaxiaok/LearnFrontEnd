@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+    <script src="jquery.js" ></script >
+</head >
+<body >
+<button id="get" >get</button >
+<button id="post" >post</button >
+<button id="corsGet" >corsGet</button >
+<button id="corsPost" >corsPost</button >
+<button id="corsPostComplex" >corsPostComplex</button >
+<script >
+  $('#get').click(function () {
+    $.ajax({
+      url: 'http://localhost:3000/get',
+      type: 'GET',
+      success: function (data) {
+        console.log(data);
+      }
+    })
+  });
+  $('#post').click(function () {
+    $.ajax({
+      url: 'http://localhost:3000/post',
+      type: 'POST',
+      success: function (data) {
+        console.log(data);
+      }
+    })
+  });
+  $('#corsGet').click(function () {
+    $.ajax({
+      url: 'http://localhost:3001/get',
+      type: 'GET',
+      success: function (data) {
+        console.log(data);
+      }
+    })
+  });
+  $('#corsPost').click(function () {
+    $.ajax({
+      url: 'http://localhost:3001/post',
+      type: 'POST',
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function (data, status, jqXHR) {
+        console.log(data);
+        console.log(jqXHR.getResponseHeader('Date'));
+      }
+    })
+  });
+  $('#corsPostComplex').click(function () {
+    $.ajax({
+      url: 'http://localhost:3001/post',
+      type: 'POST',
+      headers: { 'X-Custom-Header': 'myHeader' }, // 需在服务器指定接收该头部字段
+      success: function (data) {
+        console.log(data);
+      }
+    })
+  });
+
+</script >
+</body >
+</html >

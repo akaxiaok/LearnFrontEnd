@@ -1,0 +1,23 @@
+{
+  "name": "learnfrontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "multiparty": "^4.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akaxiaok/LearnFrontEnd.git"
+  },
+  "author": "Kimi",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/akaxiaok/LearnFrontEnd/issues"
+  },
+  "homepage": "https://github.com/akaxiaok/LearnFrontEnd#readme"
+}
