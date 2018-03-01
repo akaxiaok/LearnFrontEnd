@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+    <style >
+        body{
+            margin: 0;
+        }
+        .container{
+            min-width: 600px;
+            width: 100%;
+            display: flex;
+        }
+        .main{
+            flex-grow: 1;
+            order: 1;
+            background: darkgray;
+        }
+        .left{
+            width: 200px;
+            background: tomato;
+        }
+        .right{
+            order: 2;
+            width: 200px;
+            background: deepskyblue;
+        }
+        .container>div{
+            height: 200px;
+        }
+    </style >
+</head >
+
+<body >
+<div class="container">
+    <div class="main"></div >
+    <div class="left"></div >
+    <div class="right"></div >
+</div >
+</body >
+</html >
