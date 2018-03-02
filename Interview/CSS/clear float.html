@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+    <style >
+        .border {
+            border: lightslategrey solid 4px;
+        }
+
+        .red {
+            background: tomato;
+        }
+
+        .blue {
+            background: royalblue;
+        }
+
+        .float {
+            float: left;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+        }
+
+        .footer {
+            height: 50px;
+            background: lightblue;
+        }
+
+        .container {
+            margin: 10px;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clearfix::after {
+            clear: both;
+            content: '.';
+            display: block;
+            visibility: hidden;
+            height: 0;
+        }
+    </style >
+</head >
+<body >
+<div class="container" >
+    <div class=" border" >
+        <div class="float red box" ></div >
+        <div class="float blue box" ></div >
+    </div >
+    <div class="footer" style="clear: both;" >where should I be</div >
+</div >
+<div class="container" >
+    <div class=" border" >
+        <div class="float red box" ></div >
+        <div class="float blue box" ></div >
+        <br clear="all" >
+    </div >
+    <div class="footer" >where should I be</div >
+</div >
+
+<div class="container" >
+    <!--<div class=" border" style="overflow: hidden" >-->
+    <div class=" border" style="overflow: auto" >
+        <div class="float red box" ></div >
+        <div class="float blue box" ></div >
+    </div >
+    <div class="footer" >where should I be</div >
+</div >
+<div class="container" >
+    <div class=" border clearfix" >
+        <div class="float red box" ></div >
+        <div class="float blue box" ></div >
+    </div >
+    <div class="footer" >where should I be</div >
+</div >
+
+</body >
+</html >
