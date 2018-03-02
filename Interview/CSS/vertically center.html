@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+    <style >
+
+        .container-1 {
+            border: hotpink solid 2px;
+            position: relative;
+            height: 300px;
+        }
+
+        .image-1 {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .container-2 {
+            border: hotpink solid 2px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            height: 100px;
+            width: 100px;
+            background: tomato;
+        }
+
+        .container-3 {
+            border: hotpink solid 2px;
+            height: 300px;
+            position: relative;
+        }
+
+        .v-center-transform {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 50%;
+        }
+
+        .v-center-margin {
+            position: absolute;
+            top: 50%;
+            margin: -50px 0 0 -50px;
+            left: 50%;
+        }
+
+        .container-4 {
+            border: hotpink solid 2px;
+            padding: 100px 0;
+        }
+
+        .container-5 {
+            border: hotpink solid 2px;
+            height: 300px;
+        }
+
+        .container-5 > .box {
+            margin-top: -50px;
+        }
+
+        .base {
+            height: 50%;
+        }
+
+        .container-6 {
+            border: hotpink solid 2px;
+            height: 300px;
+            line-height: 300px;
+        }
+
+        .image-6 {
+            vertical-align: middle;
+        }
+
+        .container-7 {
+            border: hotpink solid 2px;
+            height: 300px;
+            display: table;
+            width: 100%;
+        }
+
+    </style >
+</head >
+<body >
+
+<div class="container-1" >
+    <img class="image-1" src="./pic.jpg" alt="pic" >
+</div >
+<div class="container-2" >
+    <img class="image-2" src="./pic.jpg" alt="pic" >
+</div >
+<div class="container-3" >
+    <div class=" v-center-transform" >xxxxxxxxxxxxxxx</div >
+</div >
+<div class="container-3" >
+    <div class="box v-center-margin" ></div >
+</div >
+<div class="container-4" >
+    <div class="box" ></div >
+</div >
+<div class="container-5" >
+    <div class="base" ></div >
+    <div class="box" ></div >
+</div >
+<div class="container-6" >
+    <img class="image-6" src="./pic.jpg" alt="pic" >
+</div >
+<div class="container-7" >
+    <div style="display: table-cell;vertical-align: middle;" >
+        <img class="image-7" src="./pic.jpg" alt="pic" >
+    </div >
+</div >
+</body >
+</html >
