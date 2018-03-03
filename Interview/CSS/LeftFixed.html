@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >Title</title >
+    <style >
+        * {
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .left {
+            background: tomato;
+            width: 200px;
+            height: 200px;
+        }
+
+        .right {
+            background: royalblue;
+            height: 200px;
+        }
+
+        .container-1 {
+            display: flex;
+        }
+
+        .container-1 > .right {
+            flex-grow: 1;
+        }
+
+        .container-2 > .left {
+            float: left;
+        }
+
+        .container-2 > .right {
+            margin-left: 200px;
+        }
+
+        .container-3 > .left {
+            position: absolute;
+        }
+
+        .container-3 > .right {
+            /*margin-left: 200px;*/
+            /*or*/
+            transform: translate(200px, 0);
+            margin-right: 200px;
+        }
+
+        .container-4 > .left {
+            float: left;
+        }
+
+        .container-4 > .right {
+            overflow: auto;
+        }
+
+        .container-5 > .left {
+            float: left;
+        }
+
+        .container-5 > .right {
+            float: left;
+            width: calc(100% - 200px);
+        }
+    </style >
+</head >
+<body >
+<div class="container container-1" >
+    <div class="left" ></div >
+    <div class="right" >xx</div >
+</div >
+<div class="container container-2" >
+    <div class="left" ></div >
+    <div class="right" >xx</div >
+</div >
+<div class="container container-3" >
+    <div class="left" ></div >
+    <div class="right" >xx</div >
+</div >
+<div class="container container-4" >
+    <div class="left" ></div >
+    <div class="right" >xx</div >
+</div >
+<div class="container container-5" >
+    <div class="left" ></div >
+    <div class="right" >xx</div >
+</div >
+</body >
+</html >
