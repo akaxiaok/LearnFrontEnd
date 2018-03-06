@@ -20,7 +20,7 @@
   document.getElementById('ajaxFormData').addEventListener('click', function () {
     var files = document.getElementById('file').files;
     var formData = new FormData();
-    Array.from(files).forEach(function (v, i) {
+    Array.prototype.slice.call(files).forEach(function (v, i) {
       formData.append('FormData', v);
     });
     var xhr = new XMLHttpRequest();
@@ -47,20 +47,18 @@
   });
   document.getElementById('submitFrame').addEventListener('click', function (e) {
     e.preventDefault();
-    //<iframe name="targetFrame" style="display: none" ></iframe >
-    var frame = document.getElementById('targetFrame');
-    if (!frame) {
-      frame = document.createElement('iframe');
-      frame.id = 'targetFrame';
-      frame.style.display = 'none';
-      frame.name = "targetFrame";
-      document.body.appendChild(frame);
-    }
+    var frame = document.createElement('iframe');
+    frame.id = 'targetFrame';
+    frame.style.display = 'none';
+    frame.name = "targetFrame";
+    document.body.appendChild(frame);
     var form = document.getElementById('form');
     form.target = 'targetFrame';
     form.submit();
     frame.onload = function (e) {
       console.log(this.contentDocument.body.textContent);
+      frame.onload = null;
+      document.body.removeChild(frame);
     }
   });
 </script >

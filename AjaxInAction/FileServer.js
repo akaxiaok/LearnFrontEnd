@@ -21,11 +21,11 @@ app.post('/form', function (req, res, next) {
       console.log('parse error: ' + err);
     } else {
       console.log('parse files: ' + filesTmp);
-      var key= Object.keys(files)[0];
+      var key = Object.keys(files)[0];
       var inputFile = files[key][0];
 
       var uploadedPath = inputFile.path;
-      var dstPath = './' + inputFile.originalFilename;
+      var dstPath = __dirname + '/' + inputFile.originalFilename;
       //重命名为真实文件名
       fs.rename(uploadedPath, dstPath, function (err) {
         if (err) {
