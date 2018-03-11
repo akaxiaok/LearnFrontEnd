@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" >
+    <title >scale rem</title >
+    <style >
+        body {
+            padding: 0;
+            margin: 0;
+            background: darkgray;
+        }
+
+        .box {
+            position: relative;
+            width: 2.666666666666667rem; /* 200 / fontSize */
+            height: 2.666666666666667rem;
+            background: tomato;
+        }
+
+    </style >
+    <style >
+        @media screen and (max-width: 321px) {
+            header, footer {
+                font-size: 16px
+            }
+        }
+
+        @media screen and (min-width: 321px) and (max-width: 400px) {
+            header, footer {
+                font-size: 17px
+            }
+        }
+
+        @media screen and (min-width: 400px) {
+            header, footer {
+                font-size: 19px
+            }
+        }
+
+        @media screen and (max-width: 321px) {
+            body {
+                font-size: 16px
+            }
+        }
+
+        @media screen and (min-width: 321px) and (max-width: 400px) {
+            body {
+                font-size: 17px
+            }
+        }
+
+        @media screen and (min-width: 400px) {
+            body {
+                font-size: 19px
+            }
+        }
+    </style >
+</head >
+<body >
+<div class="box" ></div >
+<script >
+  var scale = 1 / window.devicePixelRatio;
+  document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width,initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no')
+  document.documentElement.style.fontSize = document.documentElement.clientWidth / 10 + 'px';
+</script >
+
+<p >
+    设计图--iPhone 7 <br >
+    宽 750px <br >
+    盒子 200px*200px
+</p >
+</body >
+</html >
