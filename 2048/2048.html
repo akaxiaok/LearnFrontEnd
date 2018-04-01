@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8" >
+    <title >2048</title >
+    <style >
+        #tiles {
+            display: flex;
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .cell {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            border: 1px solid #a9a9a9;
+            font-size: 18px;
+        }
+
+        .tile_0 {
+
+        }
+
+        .tile_2 {
+            background: #ff2222;
+        }
+
+        .tile_4 {
+            background: #ee6633;
+        }
+
+        .tile_8 {
+            background: #dd4499;
+        }
+
+        .tile_16 {
+            background: #cc5555;
+        }
+
+        .tile_32 {
+            background: #cc0032;
+        }
+
+        .tile_64 {
+            background: #ff2266;
+        }
+
+        .tile_128 {
+            background: #ffa500;
+        }
+
+        .tile_256 {
+            background: #ffff00;
+        }
+
+        .tile_512 {
+            background: #9c0;
+        }
+
+        .tile_1024 {
+            background: #3365a5;
+        }
+
+        .tile_2048 {
+            background: #09c;
+        }
+
+        .tile_4096 {
+            background: #a6bc;
+        }
+
+        .tile_2048 {
+            background: #93c;
+        }
+    </style >
+</head >
+<body >
+<label for="rows" >rows</label ><input id="rows" type="number" value="4">
+<label for="columns" >columns</label > <input id="columns" type="number" value="4" >
+<button id="start" >Start</button >
+<div id="tiles" >
+
+</div >
+<script src="./app.js" ></script >
+</body >
+</html >
