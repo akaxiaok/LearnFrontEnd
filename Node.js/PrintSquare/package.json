@@ -1,0 +1,11 @@
+{
+  "name": "printsquare",
+  "version": "1.0.3",
+  "description": "my first package",
+  "main": "index.js",
+  "author": "TYC",
+  "license": "WTFPL",
+  "bin": {
+    "printsquare": "./bin/printsquare.js"
+  }
+}
