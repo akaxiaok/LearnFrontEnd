@@ -21,5 +21,5 @@ function merge(array, p, r, q) {
   }
 }
 
-mergeSort(array, 0, array.length);
+mergeSort(array, 0, array.length - 1);
 console.log(array);
