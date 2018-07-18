@@ -3,7 +3,7 @@ const FULFILLED = 'fulfilled';
 const REJECTED = 'rejected';
 
 function P(fn) {
-  let self = this;
+  const self = this;
   self.value = null;
   self.error = null;
   self.status = PENDING;
@@ -11,27 +11,36 @@ function P(fn) {
   self.onRejectedCallbacks = [];
 
   function resolve(value) {
-    setTimeout(() => {
-      if (self.status === PENDING) {
-        self.status = FULFILLED;
-        self.value = value;
-        self.onFulfilledCallbacks.forEach(callback => callback(self.value));
-      }
-    })
-
+    if (value instanceof P) {
+      return value.then(resolve, reject);
+    }
+    if (self.status === PENDING) {
+      setTimeout(() => {
+          self.status = FULFILLED;
+          self.value = value;
+          self.onFulfilledCallbacks.forEach(callback => callback(self.value));
+      })
+    }
   }
 
   function reject(error) {
-    setTimeout(() => {
-      if (self.status === PENDING) {
-        self.status = REJECTED;
-        self.error = error;
-        self.onRejectedCallbacks.forEach(callback => callback(self.value));
-      }
-    })
+
+    if (self.status === PENDING) {
+      setTimeout(() => {
+          self.status = REJECTED;
+          self.error = error;
+          self.onRejectedCallbacks.forEach(callback => callback(self.error));
+      })
+    }
+
   }
 
-  fn(resolve, reject);
+  try {
+    fn(resolve, reject);
+  } catch (e) {
+    reject(e);
+  }
+
 
 }
 
@@ -77,7 +86,7 @@ P.prototype.then = function (onFulfilled, onRejected) {
           reject(e);
         }
       });
-      self.onFulfilledCallbacks.push(error => {
+      self.onRejectedCallbacks.push(error => {
         try {
           let x = onRejected(error);
           resolvePromise(bridgePromise, x, resolve, reject);
@@ -90,26 +99,52 @@ P.prototype.then = function (onFulfilled, onRejected) {
 };
 
 function resolvePromise(bridgePromise, x, resolve, reject) {
-  if (x instanceof P) {
-    if (x.status === PENDING) {
-      x.then(y => {
-        resolvePromise(bridgePromise, y, resolve, reject);
-      }, error => {
-        reject(error);
-      });
-    } else {
-      x.then(resolve, reject);
+  if (bridgePromise === x) {
+    return reject(new TypeError('Circular reference'));
+  }
+  let called = false;
+  if (x != null && ((typeof x === 'object') || (typeof x === 'function'))) {
+    try {
+      let then = x.then;
+      if (typeof then === 'function') {
+        then.call(x, y => {
+          if (!called) {
+            called = true;
+            resolvePromise(bridgePromise, y, resolve, reject);
+          }
+        }, error => {
+          if (!called) {
+            called = true;
+            reject(error);
+          }
+        })
+      } else {
+        resolve(x);
+      }
+    } catch (e) {
+      if (!called) {
+        called = true;
+        reject(e);
+      }
     }
   } else {
     resolve(x);
   }
 }
 
-let p = new P((resolve, reject) => {
-  resolve("同步任务执行")
-});
+P.prototype.catch = function (onRejected) {
+  return this.then(null, onRejected);
+};
 
-p.then(value=>{
-  console.log(value);
-});
+P.deferred = function () {
+  let defer = {};
+  defer.promise = new P((resolve, reject) => {
+    defer.resolve = resolve;
+    defer.reject = reject;
+  });
+  return defer;
+};
+
+
+module.exports = P;
 
