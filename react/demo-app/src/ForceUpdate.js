@@ -18,7 +18,12 @@ class ForceUpdate extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
+
   render() {
+    console.log('render run');
     if (this.state.err) {
       throw new Error(this.state.err);
     }
