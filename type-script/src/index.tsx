@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-// import App from './App';
+import App from './App';
 import Hello from './containers/Hello';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
@@ -19,6 +19,7 @@ const store = createStore<IStoreState, EnthusiasmAction, null, null>(enthusiasm,
 ReactDOM.render(
     <Provider store={store}>
         <Hello/>
+        <App/>
     </Provider>
     ,
     document.getElementById('root') as HTMLElement

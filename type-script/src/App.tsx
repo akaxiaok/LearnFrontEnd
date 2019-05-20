@@ -3,7 +3,27 @@ import './App.css';
 
 import logo from './logo.svg';
 
+const Memo = React.memo(function MyMemo(props: { value: number }) {
+
+  // tslint:disable-next-line:no-console
+  console.log('run memo');
+  const value = props.value;
+  return (<div>
+    {value}
+  </div>)
+});
+
 class App extends React.Component {
+  public static value: number = 1;
+  public state = {
+    value:1
+  };
+  public componentDidMount(): void {
+    setInterval(() => {
+      this.setState({value: 1})
+    }, 1000)
+  }
+
   public render() {
     return (
       <div className="App">
@@ -14,6 +34,7 @@ class App extends React.Component {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <Memo value={this.state.value}/>
       </div>
     );
   }
