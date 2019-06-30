@@ -4,4 +4,3 @@ require.config({
         lodash:'https://cdn.bootcss.com/lodash.js/4.17.11/lodash',
     }
 });
-
