@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static('./'));
 app.post('/form', function (req, res, next) {
   //生成multiparty对象，并配置上传目标路径
-  var form = new multiparty.Form({ uploadDir: './' });
+  var form = new multiparty.Form({uploadDir: './'});
   //上传完成后处理
   //fields 一般的表单元素
   //files 文件
@@ -32,19 +32,30 @@ app.post('/form', function (req, res, next) {
         }
       });
     }
-    res.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
+    res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
     res.write('received upload:\n\n');
-    res.end(util.inspect({ fields: fields, files: filesTmp }));
+    res.end(util.inspect({fields: fields, files: filesTmp}));
   });
 });
 
 app.post('/post', function (req, res, next) {
-  res.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
+  res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
   res.write('received post\n\n');
   res.end();
 });
 app.get('/get', function (req, res, next) {
-  res.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
+  res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
+  res.write('received get\n\n');
+  res.end();
+});
+
+app.get('/script.js', function (req, res, next) {
+  res.writeHead(req.header('If-None-Match') ? 304 : 200, {
+    'content-type': 'text/javascript;charset=utf-8',
+    'Cache-Control': 'max-age=10',
+    'Expires': (new Date(Date.now() + 5000)).toGMTString(),
+    'Etag': 'myTag',
+  });
   res.write('received get\n\n');
   res.end();
 });
@@ -80,14 +91,14 @@ crossDomainApp.all('*', function (req, res, next) {
 });
 
 crossDomainApp.post('/post', function (req, res, next) {
-  res.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
+  res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
   res.write('crossDomainApp received post\n\n');
   res.end();
 
 });
 
 crossDomainApp.get('/get', function (req, res, next) {
-  res.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
+  res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
   res.write('crossDomainApp received get\n\n');
   res.end();
 
