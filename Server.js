@@ -54,6 +54,7 @@ app.get('/script.js', function (req, res, next) {
     'content-type': 'text/javascript;charset=utf-8',
     'Cache-Control': 'max-age=10',
     'Expires': (new Date(Date.now() + 5000)).toGMTString(),
+    'Last-modified': (new Date()).toGMTString(),
     'Etag': 'myTag',
   });
   res.write('received get\n\n');
