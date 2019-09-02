@@ -1,6 +1,6 @@
 import {decrementEnthusiasm, incrementEnthusiasm} from '../actions';
 import {IStoreState} from "../types";
-import {enthusiasm} from './index';
+import enthusiasm from './index';
 
 
 it('return the correct ', () => {

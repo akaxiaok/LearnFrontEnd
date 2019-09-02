@@ -3,38 +3,61 @@ import './Hello.css';
 
 
 export interface IProps {
-    name: string;
-    enthusiasmLevel?: number;
-    onIncrement?: () => void;
-    onDecrement?: () => void;
+  name: string;
+  enthusiasmLevel: number;
+  onIncrement?: (n: number) => void;
+  onDecrement?: (n: number) => void;
+  changeName: (name: string) => void;
 }
 
 interface IState {
-    currentEnthusiasm: number;
+  currentEnthusiasm: number;
 }
 
 class Hello extends React.Component<IProps, IState> {
-    public render(): React.ReactNode {
-        const {name, onDecrement, onIncrement, enthusiasmLevel} = this.props;
+  public static defaultProps = {
+    changeName: () => null,
+    enthusiasmLevel: 1,
+  };
 
-        return (
-            <div className="hello">
-                <div className="greeting">
-                    Hello {name + getExclamationMarks(enthusiasmLevel || 0)}
-                </div>
-                <button onClick={onDecrement}>-</button>
-                <button onClick={onIncrement}>+</button>
-            </div>
-        )
+  public render(): React.ReactNode {
+    const {name, enthusiasmLevel} = this.props;
+
+    return (
+      <div className="hello">
+        <div className="greeting">
+          Hello {name + getExclamationMarks(enthusiasmLevel || 0)}
+        </div>
+        <button onClick={this.handleDecrement}>-</button>
+        <button onClick={this.handleIncrement}>+</button>
+        <button onClick={this.handleChangeName}>revers</button>
+      </div>
+    )
+  }
+
+  private handleIncrement = () => {
+    const {onIncrement} = this.props;
+    if (onIncrement) {
+      onIncrement(2);
     }
-
+  };
+  private handleDecrement = () => {
+    const {onDecrement} = this.props;
+    if (onDecrement) {
+      onDecrement(2);
+    }
+  };
+  private handleChangeName = ()=>{
+    const {changeName, name} = this.props;
+    changeName( name.split('').reverse().join(''));
+  }
 
 }
 
 // helpers
 
 function getExclamationMarks(numChars: number) {
-    return Array(numChars + 1).join('!');
+  return Array(numChars + 1).join('!');
 }
 
 export default Hello;
