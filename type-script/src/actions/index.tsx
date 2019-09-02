@@ -38,3 +38,31 @@ export function changeName(languageName: string = ''): IChangeName {
     type: constants.CHANGE_NAME
   }
 }
+
+export function showData(json: string) {
+  return {
+    data: json,
+    type: constants.SHOW_DATA,
+  }
+}
+
+export function showLoading() {
+  return {
+    type: constants.LOADING
+  }
+}
+
+export function loadData() {
+  return (dispatch: any) => {
+    dispatch(showLoading());
+    return fetch('https://api.github.com/users/akaxiaok',
+      {
+        headers: new Headers({'Content-type': 'application/json'}),
+        method: 'GET',
+      }).then(res => res.json()).then(json => {
+      setTimeout(() => {
+        dispatch(showData(json.id));
+      }, 1000)
+    })
+  }
+}

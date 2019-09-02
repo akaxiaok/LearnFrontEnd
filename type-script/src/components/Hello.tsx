@@ -5,6 +5,8 @@ import './Hello.css';
 export interface IProps {
   name: string;
   enthusiasmLevel: number;
+  data?: string;
+  loadData: () => void;
   onIncrement?: (n: number) => void;
   onDecrement?: (n: number) => void;
   changeName: (name: string) => void;
@@ -18,10 +20,11 @@ class Hello extends React.Component<IProps, IState> {
   public static defaultProps = {
     changeName: () => null,
     enthusiasmLevel: 1,
+    loadData: () => null,
   };
 
   public render(): React.ReactNode {
-    const {name, enthusiasmLevel} = this.props;
+    const {name, enthusiasmLevel, data} = this.props;
 
     return (
       <div className="hello">
@@ -31,6 +34,11 @@ class Hello extends React.Component<IProps, IState> {
         <button onClick={this.handleDecrement}>-</button>
         <button onClick={this.handleIncrement}>+</button>
         <button onClick={this.handleChangeName}>revers</button>
+        <button onClick={this.handleLoad}>Load</button>
+        <p>
+          {data}
+        </p>
+
       </div>
     )
   }
@@ -47,11 +55,13 @@ class Hello extends React.Component<IProps, IState> {
       onDecrement(2);
     }
   };
-  private handleChangeName = ()=>{
+  private handleChangeName = () => {
     const {changeName, name} = this.props;
-    changeName( name.split('').reverse().join(''));
-  }
-
+    changeName(name.split('').reverse().join(''));
+  };
+  private handleLoad = () => {
+    this.props.loadData();
+  };
 }
 
 // helpers

@@ -4,13 +4,14 @@ import enthusiasm from './index';
 
 
 it('return the correct ', () => {
-    const store: IStoreState = {
-        enthusiasmLevel: 3,
-        languageName: 'en',
-    };
+  const store: IStoreState = {
+    data: '',
+    enthusiasmLevel: 3,
+    languageName: 'en',
+  };
 
-    expect(enthusiasm(store, decrementEnthusiasm()).enthusiasmLevel).toEqual(2);
+  expect(enthusiasm(store, decrementEnthusiasm()).enthusiasmLevel).toEqual(2);
 
-    expect(enthusiasm(store, incrementEnthusiasm()).enthusiasmLevel).toEqual(4);
+  expect(enthusiasm(store, incrementEnthusiasm()).enthusiasmLevel).toEqual(4);
 
 });

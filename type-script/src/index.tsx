@@ -1,20 +1,18 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import {Provider} from "react-redux";
+import {applyMiddleware, createStore} from 'redux';
+import thunk from 'redux-thunk';
 import App from './App';
 import Hello from './containers/Hello';
 import './index.css';
+import reducers from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 
-import {Provider} from "react-redux";
-import {createStore} from 'redux';
-import {EnthusiasmAction} from "./actions";
-import reducers from './reducers';
-import {IStoreState} from './types';
-
-const store = createStore<IStoreState, EnthusiasmAction, null, null>(reducers, {
+const store = createStore(reducers, {
   enthusiasmLevel: 1,
   languageName: 'TypeScript',
-});
+}, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

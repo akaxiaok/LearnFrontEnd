@@ -7,3 +7,11 @@ export type DECREMENT_ENTHUSIASM = typeof DECREMENT_ENTHUSIASM;
 
 export const CHANGE_NAME = 'CHANGE_NAME';
 export type CHANGE_NAME = typeof CHANGE_NAME;
+
+
+export const LOADING = 'LOADING';
+export type LOADING = typeof LOADING;
+
+
+export const SHOW_DATA = 'SHOW_DATA';
+export type SHOW_DATA = typeof SHOW_DATA;
