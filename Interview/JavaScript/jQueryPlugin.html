@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery3.js"></script>
+</head>
+<body>
+<script>
+    $.fn.log = function () {
+        console.log(this);
+        return this;
+    };
+    $('title').log();
+</script>
+</body>
+</html>

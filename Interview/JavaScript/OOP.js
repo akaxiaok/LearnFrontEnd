@@ -75,8 +75,7 @@ define(function () {
 });
 define(function () {
   function inheritPrototype(subType, superType) {
-    var prototype = create(superType.prototype);
-    subType.prototype = prototype;
+    subType.prototype = create(superType.prototype);
     subType.prototype.constructor = subType;
   }
 
